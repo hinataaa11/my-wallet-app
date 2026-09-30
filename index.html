@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F3F6EE">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="我的記帳">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>我的記帳</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+
+  <style>
+    :root{
+      --bg:#F3F6EE;
+      --text:#263025;
+      --muted:#6C756A;
+      --green:#7DB48A;
+      --green-soft:#E8F1E5;
+      --white:#FFFFFF;
+      --danger:#B95B5B;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      width:100%;
+      height:100%;
+      background:var(--bg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;
+      overflow:hidden;
+    }
+
+    body{
+      padding-top:env(safe-area-inset-top);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+
+    .app-shell{
+      position:relative;
+      width:100%;
+      height:100%;
+      background:var(--bg);
+    }
+
+    .loading{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:12px;
+      background:var(--bg);
+      z-index:5;
+      transition:opacity .25s ease;
+    }
+
+    .loading.hidden{
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .loading img{
+      width:86px;
+      height:86px;
+      border-radius:22px;
+      object-fit:cover;
+      box-shadow:0 8px 24px rgba(38,48,37,.12);
+    }
+
+    .loading strong{
+      font-size:17px;
+      color:var(--text);
+    }
+
+    .loading span{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    #appFrame{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:white;
+    }
+
+    .fallback{
+      position:absolute;
+      top:calc(env(safe-area-inset-top) + 14px);
+      left:14px;
+      right:14px;
+      z-index:10;
+      display:none;
+      padding:12px 14px;
+      background:rgba(255,255,255,.96);
+      border:1px solid #DDE6D9;
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(38,48,37,.12);
+      color:var(--text);
+    }
+
+    .fallback.show{display:block}
+
+    .fallback-title{
+      font-weight:700;
+      font-size:14px;
+      margin-bottom:6px;
+    }
+
+    .fallback-text{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+      margin-bottom:10px;
+    }
+
+    .fallback a{
+      display:inline-block;
+      text-decoration:none;
+      background:var(--green);
+      color:white;
+      font-weight:700;
+      font-size:13px;
+      padding:9px 12px;
+      border-radius:10px;
+    }
+
+    .close{
+      position:absolute;
+      top:8px;
+      right:10px;
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1;
+      padding:4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <div class="loading" id="loading">
+      <img src="./app-icon-original.png" alt="我的記帳">
+      <strong>我的記帳</strong>
+      <span>正在載入…</span>
+    </div>
+
+    <div class="fallback" id="fallback">
+      <button class="close" onclick="hideFallback()" aria-label="關閉">×</button>
+      <div class="fallback-title">如果畫面一直沒有載入</div>
+      <div class="fallback-text">
+        可能是 Apps Script 的登入或權限被瀏覽器擋住。
+      </div>
+      <a id="directLink" href="#" target="_blank" rel="noopener">直接開啟記帳系統</a>
+    </div>
+
+    <iframe
+      id="appFrame"
+      title="我的記帳"
+      allow="clipboard-read; clipboard-write"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <script>
+    // 只需要把下面這行改成你的 Apps Script /exec 網址
+    const APP_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+    const frame = document.getElementById("appFrame");
+    const loading = document.getElementById("loading");
+    const fallback = document.getElementById("fallback");
+    const directLink = document.getElementById("directLink");
+
+    directLink.href = APP_URL;
+    frame.src = APP_URL;
+
+    let loaded = false;
+
+    frame.addEventListener("load", () => {
+      loaded = true;
+      loading.classList.add("hidden");
+      fallback.classList.remove("show");
+    });
+
+    setTimeout(() => {
+      if (!loaded) {
+        fallback.classList.add("show");
+      }
+    }, 12000);
+
+    function hideFallback(){
+      fallback.classList.remove("show");
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js");
+      });
+    }
+  </script>
+</body>
+</html>
