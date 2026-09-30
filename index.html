@@ -1,156 +1,213 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#F7F7FB">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="我的記帳">
-<title>我的記帳</title>
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
-<style>
-:root{--bg:#F7F7FB;--card:#fff;--text:#222236;--muted:#77778A;--line:#E7E7F0;--primary:#5B5BD6;--primary-soft:#EEEEFF;--red:#E36A6A;--red-soft:#FDECEC;--green:#4FAF7B;--green-soft:#EAF7EF;--blue:#5B8DEF;--blue-soft:#EAF2FF;--purple:#8B6FD6;--purple-soft:#F2ECFF}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;color:var(--text)}body{padding-bottom:env(safe-area-inset-bottom)}
-.wrap{max-width:760px;margin:auto;padding:18px 14px 100px}.top{display:flex;align-items:center;gap:9px}.top h1{font-size:24px;margin:4px 0 14px}select,input,textarea,button{font:inherit}select,input,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px;box-shadow:0 3px 14px rgba(34,34,54,.04)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kpi{padding:12px;border-radius:14px}.kpi:nth-child(1){background:var(--green-soft)}.kpi:nth-child(2){background:var(--red-soft)}.kpi:nth-child(3){background:var(--blue-soft)}.kpi:nth-child(4){background:var(--purple-soft)}.kpi small{display:block;color:var(--muted);margin-bottom:5px}.kpi b{font-size:20px}.tabs{display:flex;gap:7px;overflow:auto;margin:8px 0 12px}.pill{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px}.pill.on{background:var(--primary);color:#fff;border-color:var(--primary)}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.full{grid-column:1/-1}.hidden{display:none}.section-title{font-weight:800;margin-bottom:10px}.btn{border:0;border-radius:12px;padding:11px 14px;background:var(--primary);color:#fff;font-weight:700}.btn.secondary{background:var(--blue-soft);color:var(--blue);border:1px solid #D8E6FF}.btn.danger{background:var(--red-soft);color:#C94E4E;border:1px solid #F6CACA}.btn.small{padding:6px 9px;font-size:12px}.typebar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.typebtn{border:1px solid var(--line);background:#fff;padding:10px 6px;border-radius:12px}.typebtn.on{color:#fff;border-color:transparent}.typebtn[data-type="支出"].on{background:var(--red)}.typebtn[data-type="收入"].on{background:var(--green)}.typebtn[data-type="轉帳"].on{background:var(--blue)}.typebtn[data-type="調整"].on{background:var(--purple)}.item{padding:11px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.item:last-child{border-bottom:0}.meta{font-size:13px;color:var(--muted);margin-top:3px}.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.balance-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}.balance-row:last-child{border-bottom:0}.balance-row b{color:var(--primary)}.reimburse{display:flex;gap:8px;align-items:center}.reimburse input{width:auto}.stat-block{padding:12px;background:#fafafa;border-radius:14px;margin-bottom:10px}.barrow{display:grid;grid-template-columns:minmax(105px,1fr) 2fr auto;gap:8px;align-items:center;margin:7px 0}.bar{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden}.fill{height:100%;background:var(--primary)}.bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:7px 7px calc(7px + env(safe-area-inset-bottom));display:flex;justify-content:center}.navwrap{width:min(760px,100%);display:grid;grid-template-columns:repeat(5,1fr)}.nav{border:0;background:none;padding:6px 2px;font-size:11px}.nav span{display:block;font-size:19px}.nav.active{color:var(--primary);font-weight:700;background:var(--primary-soft);border-radius:12px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:20}.modal.show{display:flex}.sheet{width:min(760px,100%);background:#fff;border-radius:22px 22px 0 0;padding:18px;max-height:90vh;overflow:auto}.status{position:fixed;top:calc(env(safe-area-inset-top) + 10px);left:50%;transform:translateX(-50%);background:#222236;color:white;padding:8px 12px;border-radius:999px;font-size:12px;display:none;z-index:50}.status.show{display:block}
-@media(max-width:480px){.row{grid-template-columns:1fr}.typebar{grid-template-columns:repeat(2,1fr)}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F3F6EE">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="我的記帳">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>我的記帳</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+
+  <style>
+    :root{
+      --bg:#F3F6EE;
+      --text:#263025;
+      --muted:#6C756A;
+      --green:#7DB48A;
+      --green-soft:#E8F1E5;
+      --white:#FFFFFF;
+      --danger:#B95B5B;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      width:100%;
+      height:100%;
+      background:var(--bg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;
+      overflow:hidden;
+    }
+
+    body{
+      padding-top:env(safe-area-inset-top);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+
+    .app-shell{
+      position:relative;
+      width:100%;
+      height:100%;
+      background:var(--bg);
+    }
+
+    .loading{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:12px;
+      background:var(--bg);
+      z-index:5;
+      transition:opacity .25s ease;
+    }
+
+    .loading.hidden{
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .loading img{
+      width:86px;
+      height:86px;
+      border-radius:22px;
+      object-fit:cover;
+      box-shadow:0 8px 24px rgba(38,48,37,.12);
+    }
+
+    .loading strong{
+      font-size:17px;
+      color:var(--text);
+    }
+
+    .loading span{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    #appFrame{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:white;
+    }
+
+    .fallback{
+      position:absolute;
+      top:calc(env(safe-area-inset-top) + 14px);
+      left:14px;
+      right:14px;
+      z-index:10;
+      display:none;
+      padding:12px 14px;
+      background:rgba(255,255,255,.96);
+      border:1px solid #DDE6D9;
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(38,48,37,.12);
+      color:var(--text);
+    }
+
+    .fallback.show{display:block}
+
+    .fallback-title{
+      font-weight:700;
+      font-size:14px;
+      margin-bottom:6px;
+    }
+
+    .fallback-text{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+      margin-bottom:10px;
+    }
+
+    .fallback a{
+      display:inline-block;
+      text-decoration:none;
+      background:var(--green);
+      color:white;
+      font-weight:700;
+      font-size:13px;
+      padding:9px 12px;
+      border-radius:10px;
+    }
+
+    .close{
+      position:absolute;
+      top:8px;
+      right:10px;
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1;
+      padding:4px;
+    }
+  </style>
 </head>
+
 <body>
-<div class="status" id="status">更新中…</div>
-<div class="wrap">
-<div class="top"><div style="flex:1"><h1>我的記帳</h1></div><button class="btn secondary small" onclick="manualRefresh()">🔄 更新</button><div style="width:145px"><select id="user"></select></div></div>
+  <div class="app-shell">
 
-<section id="view-home">
-<div class="tabs"><button class="pill" data-range="today">今日</button><button class="pill on" data-range="month">本月</button><button class="pill" data-range="year">今年</button><button class="pill" data-range="all">全部</button><button class="pill" data-range="custom">自訂</button></div>
-<div id="customRange" class="row hidden"><input type="date" id="startDate"><input type="date" id="endDate"><button class="btn full" onclick="refreshAll()">查詢</button></div>
-<div class="card grid2"><div class="kpi"><small>收入</small><b id="income">$0</b></div><div class="kpi"><small>支出</small><b id="expense">$0</b></div><div class="kpi"><small>結餘</small><b id="balance">$0</b></div><div class="kpi"><small>待報銷</small><b id="pending">$0</b></div></div>
-<div class="card"><div class="section-title">帳戶餘額</div><div id="accountBalances">載入中…</div></div>
-<div class="card"><div class="section-title">支出分類</div><div id="categories">載入中…</div></div>
-</section>
+    <div class="loading" id="loading">
+      <img src="./app-icon-original.png" alt="我的記帳">
+      <strong>我的記帳</strong>
+      <span>正在載入…</span>
+    </div>
 
-<section id="view-add" class="hidden">
-<div class="card"><div class="section-title" id="txFormTitle">新增一筆</div>
-<div class="typebar"><button class="typebtn on" data-type="支出">支出</button><button class="typebtn" data-type="收入">收入</button><button class="typebtn" data-type="轉帳">轉帳</button><button class="typebtn" data-type="調整">餘額調整</button></div>
-<div class="row">
-<input id="txDate" type="date"><input id="amount" type="number" step="1" placeholder="金額">
-<div id="categoryWrap"><select id="category"></select></div><div id="fromWrap"><select id="fromAccount"></select></div><div id="toWrap" class="hidden"><select id="toAccount"></select></div>
-<div id="paymentWrap"><select id="payment"><option>現金</option><option>銀行轉帳</option><option>信用卡</option><option>其他</option></select></div><div id="cardWrap" class="hidden"><select id="card"></select></div>
-<input id="channel" placeholder="通路，例如：全聯、蝦皮"><textarea id="note" class="full" placeholder="備註"></textarea>
-<label id="reimburseWrap" class="reimburse full"><input id="reimbursable" type="checkbox"> 此筆為代墊／可報銷</label>
-<div id="adjustNote" class="full meta hidden">餘額調整可輸入正數或負數，例如少 $150 就輸入 -150。</div>
-<button class="btn full" id="saveTxBtn" onclick="submitTx()">儲存</button><button class="btn secondary full hidden" id="cancelEditBtn" onclick="cancelTxEdit()">取消編輯</button>
-</div></div>
-</section>
+    <div class="fallback" id="fallback">
+      <button class="close" onclick="hideFallback()" aria-label="關閉">×</button>
+      <div class="fallback-title">如果畫面一直沒有載入</div>
+      <div class="fallback-text">
+        可能是 Apps Script 的登入或權限被瀏覽器擋住。
+      </div>
+      <a id="directLink" href="#" target="_blank" rel="noopener">直接開啟記帳系統</a>
+    </div>
 
-<section id="view-list" class="hidden"><div class="card"><div class="section-title">交易紀錄</div><div id="list"></div></div></section>
-<section id="view-stats" class="hidden"><div class="card"><div class="section-title">分類花費統計</div><div class="tabs"><button class="pill statpill on" data-stat="week">每週</button><button class="pill statpill" data-stat="month">每月</button></div><div id="periodStats"></div></div></section>
+    <iframe
+      id="appFrame"
+      title="我的記帳"
+      allow="clipboard-read; clipboard-write"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
 
-<section id="view-settings" class="hidden">
-<div class="card"><div class="section-title">💰 帳戶管理</div><div class="row"><input id="newAccountEmoji" placeholder="Emoji，例如 💵"><input id="newAccountName" placeholder="帳戶名稱"><select id="newAccountType"><option>現金</option><option>銀行</option><option>電子支付</option><option>其他</option></select><input id="newAccountOpening" type="number" placeholder="期初餘額"><button class="btn full" onclick="createAccount()">新增帳戶</button></div><div id="accountSettings"></div></div>
-<div class="card"><div class="section-title">👤 使用者管理</div><div class="row"><input id="newUser" placeholder="新增使用者名稱"><button class="btn" onclick="createUser()">新增</button></div><div id="userSettings"></div></div>
-<div class="card"><div class="section-title">💳 信用卡管理</div><div class="row"><input id="newCard" placeholder="例如：玉山 U Bear"><button class="btn" onclick="createCard()">新增</button></div><div id="cardSettings"></div></div>
-<div class="card"><div class="section-title">🏷️ 分類管理</div><div class="row"><input id="newEmoji" placeholder="Emoji，例如 🍰"><input id="newCategory" placeholder="分類名稱"><select id="newCategoryType"><option>支出</option><option>收入</option></select><button class="btn" onclick="createCategory()">新增</button></div><div id="categorySettings"></div></div>
-</section>
-</div>
+  <script>
+    // 只需要把下面這行改成你的 Apps Script /exec 網址
+    const APP_URL = "https://script.google.com/macros/s/AKfycbxuekAi7kHEReycLPnLu5kJ0mv2BVzOQHGX942U1ZiBtxvMde537j-0HihhdoNs8hS3/exec";
 
-<div class="bottom"><div class="navwrap"><button class="nav active" data-target="home" onclick="showView('home')"><span>🏠</span>總覽</button><button class="nav" data-target="add" onclick="showView('add')"><span>➕</span>記一筆</button><button class="nav" data-target="list" onclick="showView('list')"><span>📋</span>紀錄</button><button class="nav" data-target="stats" onclick="showView('stats')"><span>📊</span>統計</button><button class="nav" data-target="settings" onclick="showView('settings')"><span>⚙️</span>設定</button></div></div>
+    const frame = document.getElementById("appFrame");
+    const loading = document.getElementById("loading");
+    const fallback = document.getElementById("fallback");
+    const directLink = document.getElementById("directLink");
 
-<div id="editModal" class="modal" onclick="if(event.target===this)closeModal()"><div class="sheet"><div class="section-title" id="modalTitle">編輯</div><div id="modalBody"></div></div></div>
+    directLink.href = APP_URL;
+    frame.src = APP_URL;
 
-<script>
-const API_URL="https://script.google.com/macros/s/AKfycbxuekAi7kHEReycLPnLu5kJ0mv2BVzOQHGX942U1ZiBtxvMde537j-0HihhdoNs8hS3/exec";
-let INIT={users:[],accounts:[],cards:[],categories:[]},TXCACHE=[],currentRange='month',currentType='支出',statPeriod='week',editingTxId=null;
-const $=id=>document.getElementById(id),money=n=>'$'+Number(n||0).toLocaleString('zh-TW');
-function status(msg='更新中…'){const s=$('status');s.textContent=msg;s.classList.add('show');setTimeout(()=>s.classList.remove('show'),1200)}
-function todayStr(){const d=new Date(),z=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`}
+    let loaded = false;
 
-function apiGet(action,params={}){
- return new Promise((resolve,reject)=>{
-   const cb='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
-   const script=document.createElement('script');
-   const q=new URLSearchParams({action,callback:cb,...params});
-   window[cb]=r=>{delete window[cb];script.remove();r&&r.ok!==false?resolve(r.data!==undefined?r.data:r):reject(new Error(r.error||'API error'))};
-   script.onerror=()=>{delete window[cb];script.remove();reject(new Error('無法連線 Apps Script API'))};
-   script.src=API_URL+'?'+q.toString();
-   document.body.appendChild(script);
- });
-}
-async function apiWrite(action,payload={}){
- await fetch(API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,...payload})});
- await new Promise(r=>setTimeout(r,450));
- return true;
-}
-function rangeDates(){const d=new Date(),z=n=>String(n).padStart(2,'0');let s='',e='';if(currentRange==='today')s=e=todayStr();if(currentRange==='month'){s=`${d.getFullYear()}-${z(d.getMonth()+1)}-01`;e=todayStr()}if(currentRange==='year'){s=`${d.getFullYear()}-01-01`;e=todayStr()}if(currentRange==='custom'){s=$('startDate').value;e=$('endDate').value}return{start:s,end:e,userId:$('user').value}}
+    frame.addEventListener("load", () => {
+      loaded = true;
+      loading.classList.add("hidden");
+      fallback.classList.remove("show");
+    });
 
-async function loadInit(keepUser){
- try{
-  const data=await apiGet('init');
-  INIT=data;const old=keepUser||$('user').value;
-  $('user').innerHTML=data.users.map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
-  if(old&&data.users.some(u=>u.id===old))$('user').value=old;
-  refreshAccounts();refreshCards();refreshCategories();renderSettings();await refreshAll();
- }catch(e){alert(e.message)}
-}
-function userAccounts(){return INIT.accounts.filter(a=>a.userId===$('user').value)}
-function refreshAccounts(){const o=userAccounts().map(a=>`<option value="${a.name}">${a.emoji||''} ${a.name}</option>`).join('');$('fromAccount').innerHTML=o;$('toAccount').innerHTML=o}
-function refreshCards(){$('card').innerHTML=INIT.cards.filter(c=>c.userId===$('user').value).map(c=>`<option>${c.bank}</option>`).join('')}
-function refreshCategories(){$('category').innerHTML=INIT.categories.filter(c=>c.type===currentType).map(c=>`<option value="${c.emoji} ${c.name}">${c.emoji} ${c.name}</option>`).join('')}
-function setTypeUI(){
- document.querySelectorAll('.typebtn').forEach(x=>x.classList.toggle('on',x.dataset.type===currentType));
- const ex=currentType==='支出',inc=currentType==='收入',tr=currentType==='轉帳',adj=currentType==='調整';
- $('categoryWrap').classList.toggle('hidden',tr||adj);$('fromWrap').classList.toggle('hidden',inc||adj);$('toWrap').classList.toggle('hidden',ex);
- $('paymentWrap').classList.toggle('hidden',tr||adj);$('cardWrap').classList.add('hidden');$('channel').classList.toggle('hidden',tr||adj);$('reimburseWrap').classList.toggle('hidden',!ex);$('adjustNote').classList.toggle('hidden',!adj);
- if(inc||tr||adj)$('toWrap').classList.remove('hidden'); if(tr)$('fromWrap').classList.remove('hidden'); refreshCategories();
-}
-function renderSettings(){
- $('accountSettings').innerHTML=userAccounts().map(a=>`<div class="item"><span>${a.emoji||''} ${a.name} ・ ${a.type}<div class="meta">期初餘額 ${money(a.opening)}</div></span><div class="actions"><button class="btn secondary small" onclick="openAccountEdit('${a.id}')">編輯</button><button class="btn danger small" onclick="removeAccount('${a.id}')">刪除</button></div></div>`).join('')||'尚無帳戶';
- $('userSettings').innerHTML=INIT.users.map(u=>`<div class="item"><span>${u.name}</span><div class="actions"><button class="btn secondary small" onclick="openUserEdit('${u.id}')">編輯</button><button class="btn danger small" onclick="removeUser('${u.id}')">刪除</button></div></div>`).join('');
- $('cardSettings').innerHTML=INIT.cards.filter(c=>c.userId===$('user').value).map(c=>`<div class="item"><span>💳 ${c.bank}</span><div class="actions"><button class="btn secondary small" onclick="openCardEdit('${c.id}')">編輯</button><button class="btn danger small" onclick="removeCard('${c.id}')">刪除</button></div></div>`).join('')||'尚無信用卡';
- $('categorySettings').innerHTML=INIT.categories.map(c=>`<div class="item"><span>${c.emoji} ${c.name} ・ ${c.type}</span><div class="actions"><button class="btn secondary small" onclick="openCategoryEdit('${c.id}')">編輯</button><button class="btn danger small" onclick="removeCategory('${c.id}')">刪除</button></div></div>`).join('');
-}
-async function refreshAll(){await Promise.all([loadDashboard(),loadBalances(),loadList(),loadPeriodStats()]);renderSettings()}
-async function loadDashboard(){const s=await apiGet('summary',rangeDates());$('income').textContent=money(s.income);$('expense').textContent=money(s.expense);$('balance').textContent=money(s.balance);$('pending').textContent=money(s.reimbursablePending);$('categories').innerHTML=s.categoryData.length?s.categoryData.map(x=>`<div class="item"><span>${x[0]}</span><b>${money(x[1])}</b></div>`).join(''):'尚無資料'}
-async function loadBalances(){const rows=await apiGet('balances',{userId:$('user').value});$('accountBalances').innerHTML=rows.length?rows.map(a=>`<div class="balance-row"><span>${a.emoji||''} ${a.name}<div class="meta">${a.type}</div></span><b>${money(a.balance)}</b></div>`).join(''):'尚無帳戶'}
-async function loadList(){const rows=await apiGet('transactions',rangeDates());TXCACHE=rows;$('list').innerHTML=rows.length?rows.map(r=>{let sign='',route='',cls='';if(r.type==='支出'){sign='-';route=r.fromAccount?`・${r.fromAccount}`:''}if(r.type==='收入'){sign='+';route=r.toAccount?`・${r.toAccount}`:''}if(r.type==='轉帳')route=`・${r.fromAccount||'?'} → ${r.toAccount||'?'}`;if(r.type==='調整'){sign=r.amount>=0?'+':'';route=r.toAccount?`・${r.toAccount}`:''}return `<div class="item"><div style="flex:1"><b>${r.type==='轉帳'?'↔️ 轉帳':r.type==='調整'?'⚖️ 餘額調整':r.category||r.type}</b><div class="meta">${r.date}${route}${r.channel?'・'+r.channel:''}</div><div class="meta">${r.note||''}</div>${r.reimbursable?`<div class="meta">報銷：${r.reimburseStatus||'待報銷'} ${r.reimburseStatus!=='已報銷'?`<button class="btn secondary small" onclick="markDone('${r.id}')">設為已報銷</button>`:''}</div>`:''}<div class="actions"><button class="btn secondary small" onclick="editTx('${r.id}')">編輯</button><button class="btn danger small" onclick="removeTx('${r.id}')">刪除</button></div></div><b>${sign}${money(Math.abs(r.amount))}</b></div>`}).join(''):'尚無紀錄'}
-async function loadPeriodStats(){const rows=await apiGet('periodStats',{...rangeDates(),period:statPeriod});$('periodStats').innerHTML=rows.length?rows.slice().reverse().map(p=>{const max=Math.max(...p.categories.map(x=>x[1]),1);return `<div class="stat-block"><b>${statPeriod==='week'?'週起始：':'月份：'}${p.period}</b><div class="meta">總支出 ${money(p.total)}</div>${p.categories.map(x=>`<div class="barrow"><span>${x[0]}</span><div class="bar"><div class="fill" style="width:${Math.max(4,x[1]/max*100)}%"></div></div><b>${money(x[1])}</b></div>`).join('')}</div>`}).join(''):'尚無資料'}
+    setTimeout(() => {
+      if (!loaded) {
+        fallback.classList.add("show");
+      }
+    }, 12000);
 
-function showView(v){['home','add','list','stats','settings'].forEach(x=>$('view-'+x).classList.add('hidden'));$('view-'+v).classList.remove('hidden');document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.target===v))}
-function txPayload(){const ex=currentType==='支出',inc=currentType==='收入',tr=currentType==='轉帳',adj=currentType==='調整';return{date:$('txDate').value,userId:$('user').value,type:currentType,category:(ex||inc)?$('category').value:'',amount:$('amount').value,fromAccount:(ex||tr)?$('fromAccount').value:'',toAccount:(inc||tr||adj)?$('toAccount').value:'',payment:ex?$('payment').value:'',card:(ex&&$('payment').value==='信用卡')?$('card').value:'',channel:(ex||inc)?$('channel').value:'',note:$('note').value,reimbursable:ex&&$('reimbursable').checked}}
-async function submitTx(){const d=txPayload();try{await apiWrite(editingTxId?'updateTransaction':'saveTransaction',editingTxId?{id:editingTxId,...d}:d);cancelTxEdit();await loadInit($('user').value);showView('list');status('已儲存')}catch(e){alert(e.message)}}
-function editTx(id){const r=TXCACHE.find(x=>x.id===id);if(!r)return;editingTxId=id;currentType=r.type;setTypeUI();$('txDate').value=r.date;$('amount').value=r.amount;$('channel').value=r.channel||'';$('note').value=r.note||'';$('reimbursable').checked=!!r.reimbursable;setTimeout(()=>{if(r.category)$('category').value=r.category;if(r.fromAccount)$('fromAccount').value=r.fromAccount;if(r.toAccount)$('toAccount').value=r.toAccount;$('payment').value=r.payment||'現金';$('cardWrap').classList.toggle('hidden',$('payment').value!=='信用卡');if(r.card)$('card').value=r.card},0);$('txFormTitle').textContent='編輯紀錄';$('saveTxBtn').textContent='更新';$('cancelEditBtn').classList.remove('hidden');showView('add')}
-function cancelTxEdit(){editingTxId=null;currentType='支出';setTypeUI();$('txFormTitle').textContent='新增一筆';$('saveTxBtn').textContent='儲存';$('cancelEditBtn').classList.add('hidden');$('txDate').value=todayStr();$('amount').value='';$('channel').value='';$('note').value='';$('reimbursable').checked=false}
-async function removeTx(id){if(confirm('確定刪除這筆紀錄？')){await apiWrite('deleteTransaction',{id});await loadInit($('user').value)}}
-async function markDone(id){await apiWrite('markReimbursed',{id});await loadInit($('user').value)}
+    function hideFallback(){
+      fallback.classList.remove("show");
+    }
 
-function openModal(t,b){$('modalTitle').textContent=t;$('modalBody').innerHTML=b;$('editModal').classList.add('show')}function closeModal(){$('editModal').classList.remove('show')}
-async function createUser(){await apiWrite('addUser',{name:$('newUser').value});$('newUser').value='';await loadInit()}
-function openUserEdit(id){const u=INIT.users.find(x=>x.id===id);openModal('編輯使用者',`<div class="row"><input id="editUserName" value="${u.name}"><button class="btn" onclick="saveUserEdit('${id}')">儲存</button></div>`)}
-async function saveUserEdit(id){await apiWrite('updateUser',{id,name:$('editUserName').value});closeModal();await loadInit($('user').value)}
-async function removeUser(id){if(confirm('確定刪除？')){await apiWrite('deleteUser',{id});await loadInit()}}
-
-async function createAccount(){await apiWrite('addAccount',{userId:$('user').value,emoji:$('newAccountEmoji').value,name:$('newAccountName').value,type:$('newAccountType').value,opening:$('newAccountOpening').value});$('newAccountEmoji').value='';$('newAccountName').value='';$('newAccountOpening').value='';await loadInit($('user').value)}
-function openAccountEdit(id){const a=INIT.accounts.find(x=>x.id===id),opts=INIT.users.map(u=>`<option value="${u.id}" ${u.id===a.userId?'selected':''}>${u.name}</option>`).join('');openModal('編輯帳戶',`<div class="row"><select id="editAccUser">${opts}</select><input id="editAccEmoji" value="${a.emoji||''}"><input id="editAccName" value="${a.name}"><select id="editAccType"><option ${a.type==='現金'?'selected':''}>現金</option><option ${a.type==='銀行'?'selected':''}>銀行</option><option ${a.type==='電子支付'?'selected':''}>電子支付</option><option ${a.type==='其他'?'selected':''}>其他</option></select><input id="editAccOpening" type="number" value="${a.opening}"><button class="btn full" onclick="saveAccountEdit('${id}')">儲存</button></div>`)}
-async function saveAccountEdit(id){await apiWrite('updateAccount',{id,userId:$('editAccUser').value,emoji:$('editAccEmoji').value,name:$('editAccName').value,type:$('editAccType').value,opening:$('editAccOpening').value});closeModal();await loadInit($('user').value)}
-async function removeAccount(id){if(confirm('確定刪除？')){await apiWrite('deleteAccount',{id});await loadInit($('user').value)}}
-
-async function createCard(){await apiWrite('addCard',{userId:$('user').value,bank:$('newCard').value});$('newCard').value='';await loadInit($('user').value)}
-function openCardEdit(id){const c=INIT.cards.find(x=>x.id===id),opts=INIT.users.map(u=>`<option value="${u.id}" ${u.id===c.userId?'selected':''}>${u.name}</option>`).join('');openModal('編輯信用卡',`<div class="row"><select id="editCardUser">${opts}</select><input id="editCardName" value="${c.bank}"><button class="btn full" onclick="saveCardEdit('${id}')">儲存</button></div>`)}
-async function saveCardEdit(id){await apiWrite('updateCard',{id,userId:$('editCardUser').value,bank:$('editCardName').value});closeModal();await loadInit($('user').value)}
-async function removeCard(id){if(confirm('確定刪除？')){await apiWrite('deleteCard',{id});await loadInit($('user').value)}}
-
-async function createCategory(){await apiWrite('addCategory',{emoji:$('newEmoji').value,name:$('newCategory').value,type:$('newCategoryType').value});$('newEmoji').value='';$('newCategory').value='';await loadInit($('user').value)}
-function openCategoryEdit(id){const c=INIT.categories.find(x=>x.id===id);openModal('編輯分類',`<div class="row"><input id="editCatEmoji" value="${c.emoji||''}"><input id="editCatName" value="${c.name}"><select id="editCatType"><option ${c.type==='支出'?'selected':''}>支出</option><option ${c.type==='收入'?'selected':''}>收入</option></select><button class="btn" onclick="saveCategoryEdit('${id}')">儲存</button></div>`)}
-async function saveCategoryEdit(id){await apiWrite('updateCategory',{id,emoji:$('editCatEmoji').value,name:$('editCatName').value,type:$('editCatType').value});closeModal();await loadInit($('user').value)}
-async function removeCategory(id){if(confirm('確定刪除？')){await apiWrite('deleteCategory',{id});await loadInit($('user').value)}}
-
-async function manualRefresh(){status();await loadInit($('user').value)}
-$('user').onchange=()=>{refreshAccounts();refreshCards();renderSettings();refreshAll()}
-$('payment').onchange=()=>$('cardWrap').classList.toggle('hidden',$('payment').value!=='信用卡')
-document.querySelectorAll('.typebtn').forEach(b=>b.onclick=()=>{currentType=b.dataset.type;setTypeUI()})
-document.querySelectorAll('.pill[data-range]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.pill[data-range]').forEach(x=>x.classList.remove('on'));b.classList.add('on');currentRange=b.dataset.range;$('customRange').classList.toggle('hidden',currentRange!=='custom');if(currentRange!=='custom')refreshAll()})
-document.querySelectorAll('.statpill').forEach(b=>b.onclick=()=>{document.querySelectorAll('.statpill').forEach(x=>x.classList.remove('on'));b.classList.add('on');statPeriod=b.dataset.stat;loadPeriodStats()})
-$('txDate').value=todayStr();setTypeUI();loadInit();
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js'));
-</script>
-</body></html>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js");
+      });
+    }
+  </script>
+</body>
+</html>
